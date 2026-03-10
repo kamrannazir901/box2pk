@@ -1,30 +1,37 @@
 Shipbox Plugin
-Shipbox is a streamlined order management and shipping preparation plugin for WordPress. It allows customers to easily submit their order details, track shipments, and manage consolidation requests directly from their dashboard.
+Shipbox is a streamlined order management and shipping preparation plugin for WordPress, designed to simplify warehouse delivery tracking and consolidation for customers.
 
-Features
-Order Confirmation: Customers can submit tracking numbers and order details for incoming warehouse shipments.
+🚀 Features
+Order Confirmation: Seamlessly submit merchant details, order numbers, and tracking information.
 
-Customer Dashboard: A clean, user-friendly interface for tracking order history and payment status.
+Warehouse Management: Dynamic selection of global warehouse locations with automated address display.
 
-Stripe Integration: Secure online payment processing for shipping fees.
+Smart Consolidation: Consolidate multiple packages into a single shipment to save up to 20% on fees.
 
-Consolidation Tools: Easily combine multiple orders to save on shipping costs.
+Stripe Integration: Secure, one-click payment processing for shipping fees via Stripe Checkout.
 
-Dynamic Warehouse Selector: Real-time warehouse address display.
+User Dashboard: A clean, centralized interface for managing shipments and viewing payment history.
 
-Installation
-Upload the shipbox folder to the /wp-content/plugins/ directory.
+🛠 Installation
+Download: Download the plugin files.
 
-Activate the plugin through the 'Plugins' menu in WordPress.
+Upload: Place the shipbox folder into your /wp-content/plugins/ directory.
 
-Configure your Stripe API keys and warehouse settings in the plugin settings page.
+Activate: Navigate to the Plugins menu in your WordPress dashboard and click Activate.
 
-Usage
-Submit Shipment: Navigate to the "Shipment" tab in your customer dashboard to add new merchant orders.
+Configure: Go to the plugin settings page to enter your Stripe API keys and Warehouse address data.
 
-Billing: Use the "Billing" tab to pay for pending shipping fees via Stripe.
+📋 Usage
+Submitting Orders: Customers can navigate to the Shipment tab to inform the warehouse of incoming deliveries.
 
-Tracking: View your shipping history to monitor the status of all your consolidated packages.
+Tracking: Use the History tab to monitor existing order statuses.
 
-Support
-For issues or feature requests, please open an issue in this repository.
+Payments: Pending shipping fees can be settled via the Billing tab using integrated Stripe payment links.
+
+⚖️ License
+This project is licensed under the GPL-2.0-or-later license.
+
+🛡 Security Note
+Never hardcode your API keys in any file. This plugin retrieves configuration settings dynamically from the WordPress options database to ensure your credentials remain secure.
+
+Developed for efficient cross-border logistics.
