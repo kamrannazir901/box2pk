@@ -1,0 +1,344 @@
+:root {
+  --plugin-red: #cd0613;
+  --plugin-green: #1a9c38;
+  --plugin-brown: #e0a954;
+  --plugin-purple: #224080;
+  --plugin-black: #050608;
+}
+
+.shipbox-page-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #000;
+  text-transform: uppercase !important;
+}
+
+.shipbox-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+.shipbox-subtitle a {
+  color: var(--plugin-green);
+}
+
+a.btn,
+a {
+  text-decoration: none !important;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--plugin-green);
+  border: 2px solid var(--plugin-green);
+  cursor: pointer;
+}
+
+/* Radio */
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--plugin-green);
+  border: 2px solid var(--plugin-green);
+  cursor: pointer;
+}
+
+input,
+textarea {
+  border: 1px solid rgb(148, 146, 146) !important;
+  padding-left: 4px;
+}
+
+/**
+ * ============================================================
+ * SHIPBOX USER HEADER WIDGET (Consolidated)
+ * ============================================================
+ */
+
+.shipbox-user-widget {
+  position: relative !important;
+  z-index: 99999 !important;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  max-width: 220px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.shipbox-profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+}
+
+.shipbox-icon-wrap {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f4f8;
+  border: 1px solid #e2e8e0;
+}
+
+.shipbox-custom-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shipbox-user-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.shipbox-name {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--plugin-purple);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+}
+
+.shipbox-cid {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.2;
+}
+
+.shipbox-arrow {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-left: 2px;
+}
+
+/* Dropdown Base */
+.shipbox-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  width: 180px !important;
+  min-width: 180px !important;
+  border-radius: 8px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  margin: 0;
+  list-style: none !important;
+  z-index: 100000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Dropdown Visibility (JS & Hover) */
+.shipbox-dropdown.is-active {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto;
+}
+
+@media (min-width: 769px) {
+  .shipbox-user-widget:hover .shipbox-dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* Header Parent Fixes */
+header,
+.site-header,
+.header-main,
+.ast-main-header-wrap,
+.elementor-location-header {
+  overflow: visible !important;
+}
+
+/* Dropdown Items */
+.shipbox-dropdown li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.shipbox-dropdown li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  text-decoration: none !important;
+  color: #334155 !important;
+  font-size: 14px;
+  transition: background 0.2s;
+  border-radius: 4px;
+}
+
+.shipbox-dropdown li a:hover {
+  background: #f8fafc;
+  color: var(--plugin-red) !important;
+}
+
+.shipbox-dropdown .dashicons {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shipbox-dropdown li a:hover .dashicons {
+  color: var(--plugin-red);
+}
+
+.shipbox-dropdown li.divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 6px 0;
+}
+
+.shipbox-dropdown li a.logout {
+  color: var(--plugin-red) !important;
+}
+
+.shipbox-dropdown li a.logout .dashicons {
+  color: var(--plugin-red);
+}
+
+/* Mobile Specific Tweaks */
+@media (max-width: 768px) {
+  .shipbox-user-widget {
+    position: relative !important;
+  }
+  .shipbox-dropdown {
+    /* Set a fixed pixel width for mobile so it doesn't collapse */
+    width: 200px !important;
+    min-width: 200px !important;
+    left: auto !important;
+    right: 0 !important; /* Align to right edge of widget */
+    top: 50px !important;
+  }
+  .shipbox-name {
+    max-width: 80px;
+  }
+  .shipbox-arrow {
+    display: none;
+  }
+}
+
+/**
+ * ============================================================
+ * OTHER STYLES (Calculator, Previews, Merchants)
+ * ============================================================
+ */
+
+/* Enhanced Preview Container */
+#preview-container {
+  height: 350px;
+  background-color: #f8fafc !important;
+  border: 2px dashed var(--plugin-brown) !important;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+#image-preview {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+#placeholder-text {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media (max-width: 576px) {
+  #preview-container {
+    height: 220px !important;
+    margin-top: 10px;
+  }
+}
+
+/* Merchant Rows Mobile */
+@media (max-width: 576px) {
+  .merchant-order-row .form-control {
+    font-size: 12px;
+    padding: 8px 5px;
+  }
+  .merchant-order-row .col-6,
+  .merchant-order-row .col-5 {
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+}
+
+.add-merchant-row .dashicons,
+.remove-merchant-row .dashicons {
+  width: auto;
+  height: auto;
+  line-height: inherit;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+}
+
+/* Economy Section Callout */
+.economy-callout {
+  background-color: #f0fff4 !important;
+  border: 2px solid var(--plugin-green) !important;
+  transition: transform 0.2s ease;
+}
+
+.economy-callout:hover {
+  transform: translateY(-2px);
+  background-color: #e6ffed !important;
+}
+
+#economy-section .form-check {
+  padding-left: 20px;
+}
+
+#economy-section .form-check-input {
+  margin-top: 0;
+  border: 2px solid var(--plugin-green);
+}
+
+#economy-section .form-check-input:checked {
+  background-color: var(--plugin-green);
+  border-color: var(--plugin-green);
+}
