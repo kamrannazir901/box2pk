@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 require_once WP_PLUGIN_DIR . '/shipbox/includes/lib/stripe-php/init.php';
-
+ 
 // 1. Fetch Settings & State
 $settings = get_option('shipbox_payment_settings');
 $payment_enabled = isset($settings['enable_online_payment']) && $settings['enable_online_payment'] == '1';
