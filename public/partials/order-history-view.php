@@ -33,14 +33,20 @@
     
     <div class="mb-4 d-flex justify-content-between align-items-end flex-wrap">
         <div>
-            <p class="text-uppercase mb-2" style="font-size: 0.85rem; letter-spacing: 0.5px;">
-                <?php echo count($shipments); ?> ORDER PLACED
+            <p class=" mb-2" style="font-size: 0.85rem; letter-spacing: 0.5px; color: #666;">
+                <?php 
+                    if (!empty($_GET['order_search'])) {
+                        echo "Showing search results for: " . esc_html($_GET['order_search']);
+                    } else {
+                        echo "Showing latest 10 orders";
+                    }
+                ?>
             </p>
-            <form method="GET" action="" class="d-flex" style="max-width: 350px;">
+            <form method="GET" action="" class="d-flex" style="max-width: 280px; width: 280px;">
                 <input type="hidden" name="tab" value="history">
                 <div class="input-group border rounded-pill bg-white overflow-hidden" style="border: 1px solid #ddd !important;">
                     <input type="text" name="order_search" class="form-control border-0 px-3" 
-                           placeholder="Search Order Number..." 
+                           placeholder="Search Order # or Tracking #" 
                            value="<?php echo isset($_GET['order_search']) ? esc_attr($_GET['order_search']) : ''; ?>">
                     <button class="btn btn-white text-muted border-0" type="submit">
                         <i class="dashicons dashicons-search"></i>

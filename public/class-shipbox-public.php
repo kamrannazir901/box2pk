@@ -294,20 +294,23 @@ class Shipbox_Public {
 		
 		// Check for search input
 		$search_query = isset($_GET['order_search']) ? sanitize_text_field($_GET['order_search']) : '';
-
+		$params = [$current_user_id];
 		// SQL query to get the latest 10 entries with optional search
-		$sql = "SELECT o.id,o.payment_status, o.created_at, o.order_number, o.status, o.final_price,o.shipping_price, c.city 
+		$sql = "SELECT o.id,o.payment_status, o.created_at, o.order_number, o.status, o.merchant_tracking_number, o.final_price,o.shipping_price, c.city 
 				FROM {$wpdb->prefix}shipbox_orders o
 				JOIN {$wpdb->prefix}shipbox_customers c ON o.customer_id = c.id
 				WHERE c.user_id = %d";
 
 		if ( ! empty($search_query) ) {
-			$sql .= $wpdb->prepare(" AND o.order_number LIKE %s", '%' . $wpdb->esc_like($search_query) . '%');
+			$sql .= " AND (o.order_number LIKE %s OR o.merchant_tracking_number LIKE %s)";
+			$search_term = '%' . $wpdb->esc_like($search_query) . '%';
+			$params[] = $search_term;
+			$params[] = $search_term;
 		}
 
 		$sql .= " ORDER BY o.created_at DESC LIMIT 10";
 
-		$shipments = $wpdb->get_results($wpdb->prepare($sql, $current_user_id));
+		$shipments = $wpdb->get_results($wpdb->prepare($sql, ...$params));
 
 		ob_start();
 		include plugin_dir_path(__FILE__) . 'partials/order-history-view.php';

@@ -310,8 +310,17 @@ class Shipbox_Customer_Table extends WP_List_Table {
         
         if ( ! empty( $_REQUEST['s'] ) ) {
             $search = '%' . $wpdb->esc_like( sanitize_text_field( $_REQUEST['s'] ) ) . '%';
-            $where .= " AND (c.customer_id LIKE %s OR u.display_name LIKE %s OR u.user_email LIKE %s OR c.phone LIKE %s OR c.city LIKE %s)";
-            $search_params = array_fill(0, 5, $search);
+            
+            // Add to WHERE clause
+            $where .= " AND (c.customer_id LIKE %s OR u.display_name LIKE %s OR u.user_email LIKE %s OR c.phone LIKE %s OR c.alt_phone LIKE %s OR c.city LIKE %s)";
+            
+            // Add the search term once for each %s placeholder
+            $search_params[] = $search; // customer_id
+            $search_params[] = $search; // display_name
+            $search_params[] = $search; // user_email
+            $search_params[] = $search; // phone
+            $search_params[] = $search; // alt_phone
+            $search_params[] = $search; // city
         }
 
         // Sorting Logic

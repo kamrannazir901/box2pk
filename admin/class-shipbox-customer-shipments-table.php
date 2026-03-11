@@ -326,7 +326,8 @@ class Shipbox_Customer_Shipments_Table extends WP_List_Table {
         $search = isset($_REQUEST['s']) ? sanitize_text_field($_REQUEST['s']) : '';
         if (!empty($search)) {
             $search_like = '%' . $wpdb->esc_like($search) . '%';
-            $where .= " AND (order_number LIKE %s OR merchant LIKE %s OR merchant_order_number LIKE %s)";
+            $where .= " AND (order_number LIKE %s OR merchant LIKE %s OR merchant_order_number LIKE %s OR merchant_tracking_number LIKE %s)";
+            $where_params[] = $search_like;
             $where_params[] = $search_like;
             $where_params[] = $search_like;
             $where_params[] = $search_like;

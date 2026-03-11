@@ -193,8 +193,8 @@ class Shipbox_Order_Table extends WP_List_Table {
         if ( !empty($_REQUEST['s']) ) {
             $search = '%' . $wpdb->esc_like( sanitize_text_field($_REQUEST['s']) ) . '%';
             $where[] = $wpdb->prepare(
-                "(o.order_number LIKE %s OR o.merchant LIKE %s OR o.merchant_order_number LIKE %s OR u.display_name LIKE %s)",
-                $search, $search, $search, $search
+                "(o.order_number LIKE %s OR o.merchant LIKE %s OR o.merchant_order_number LIKE %s OR o.merchant_tracking_number LIKE %s OR u.display_name LIKE %s)",
+                $search, $search, $search, $search, $search
             );
         }
 
