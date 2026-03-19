@@ -115,6 +115,22 @@
         background: #ff0000 !important;
         color: #fff !important;
     }
+
+
+    .sb-pass-container {
+        position: relative !important;
+    }
+
+    .sb-eye-toggle {
+        position: absolute !important;
+        right: 15px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        color: #666 !important;
+    }
 </style>
 
 <div id="sb-reg-isolation">
@@ -197,13 +213,24 @@
                        value="<?php echo isset($_POST['phone_alt']) ? esc_attr($_POST['phone_alt']) : ''; ?>">
             </div>
 
-            <div class="sb-col-6 sb-field-group">
+           <div class="sb-col-6 sb-field-group">
                 <label class="sb-label">Create Password*</label>
-                <input type="password" name="password" class="sb-input" placeholder="Please Create Your Password" required>
+                <div class="sb-pass-container">
+                    <input type="password" name="password" id="reg-password" class="sb-input" placeholder="Please Create Your Password" required>
+                    <span class="sb-eye-toggle" onclick="toggleRegPass('reg-password', this)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                    </span>
+                </div>
             </div>
+
             <div class="sb-col-6 sb-field-group">
                 <label class="sb-label">Confirm Password*</label>
-                <input type="password" name="confirm_password" class="sb-input" placeholder="Please Confirm Your Password" required>
+                <div class="sb-pass-container">
+                    <input type="password" name="confirm_password" id="confirm-password" class="sb-input" placeholder="Please Confirm Your Password" required>
+                    <span class="sb-eye-toggle" onclick="toggleRegPass('confirm-password', this)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                    </span>
+                </div>
             </div>
 
             <div class="sb-col-12 sb-field-group">
@@ -233,3 +260,18 @@
         </div>
     </form>
 </div>
+<script>
+function toggleRegPass(inputId, el) {
+    const p = document.getElementById(inputId);
+    const openIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+    const closeIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+    
+    if (p.type === "password") {
+        p.type = "text";
+        el.innerHTML = openIcon;
+    } else {
+        p.type = "password";
+        el.innerHTML = closeIcon;
+    }
+}
+</script>

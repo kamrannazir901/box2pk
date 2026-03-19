@@ -1,10 +1,10 @@
 <?php
-/**
- * Box2PK Professional Login Template
- * Full Width Container | One-Liner Mobile Header | 18px Labels
- */
 if ( is_user_logged_in() ) {
-    wp_redirect( home_url( '/dashboard' ) ); 
+    if ( !headers_sent() ) {
+        wp_safe_redirect( home_url( '/dashboard/' ) );
+    } else {
+        echo '<script>window.location.href="' . esc_url( home_url( '/dashboard/' ) ) . '";</script>';
+    }
     exit;
 }
 ?>
@@ -15,9 +15,9 @@ if ( is_user_logged_in() ) {
         all: unset;
         display: block;
         width: 100% !important;
-        max-width: 800px !important; /* Page width as requested */
-        margin: 60px auto !important;
-        padding: 0 20px !important;
+        max-width: 1000px !important; /* Adjusted for image proportions */
+        margin: 80px auto !important;
+        padding: 0 30px !important;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
         box-sizing: border-box !important;
     }
@@ -26,65 +26,77 @@ if ( is_user_logged_in() ) {
         box-sizing: border-box !important;
     }
 
-    /* ─── One-Liner Header ────────────────────────── */
+    /* ─── Header Styling ────────────────────────── */
     .login-header-area {
-        margin-bottom: 45px !important;
+        margin-bottom: 50px !important;
         text-align: left !important;
     }
 
     .login-welcome-title {
         display: flex !important;
         align-items: center !important;
+        justify-content: flex-start !important;
         flex-wrap: nowrap !important;
-        font-size: 2.5rem !important;
+        font-size: 3rem !important;
         font-weight: 500 !important;
         color: #000 !important;
-        line-height: 1 !important;
         margin: 0 !important;
-        white-space: nowrap !important;
+        letter-spacing: -1px !important;
     }
+
+   
 
     .login-logo {
-        height: 65px !important;
+        height: 90px !important;
         width: auto !important;
-        margin: 0 12px !important;
+        /* Reduced horizontal margin (the second value) to 5px or 0 */
+        margin: -60px 5px !important; 
         flex-shrink: 0 !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
     }
 
-    /* ─── Form Styling ──────────────────────────────────────── */
+    /* ─── Form & Spacing ────────────────────────────────────── */
     .sb-field-group {
-        margin-bottom: 25px !important;
+        margin-bottom: 35px !important; /* Spacing between input blocks */
+    }
+
+    .sb-label-row {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-end !important;
+        padding-left: 20px !important; /* Aligns label text with placeholder text */
+        margin-bottom: 12px !important; /* Spacing between label and input */
     }
 
     .sb-label {
-        display: block !important;
-        font-size: 18px !important; /* Requested size */
+        font-size: 20px !important;
         font-weight: 500 !important;
-        color: #000 !important;
-        margin-bottom: 10px !important;
+        color: #333 !important;
+        padding: 0 !important;
     }
 
+    /* ─── Input Styling ─────────────────────────────────────── */
     .sb-input {
         width: 100% !important;
-        height: 55px !important;
-        font-size: 16px !important;
-        border: 1px solid #ced4da !important;
-        border-radius: 8px !important;
+        height: 45px !important;
+        font-size: 20px !important;
+        border: 1.5px solid #d1d5db !important;
+        border-radius: 12px !important; /* Softer, rounder corners like the pic */
         padding: 0 20px !important;
         color: #333 !important;
         background-color: #fff !important;
         outline: none !important;
+        transition: border-color 0.2s !important;
     }
 
-    /* Black Placeholders */
     .sb-input::placeholder {
-        color: #000 !important;
-        opacity: 1 !important;
+        color: #4b5563 !important;
+        opacity: 0.9 !important;
     }
 
     .sb-input:focus {
         border-color: #00A651 !important;
-        box-shadow: 0 0 0 3px rgba(0, 166, 81, 0.1) !important;
     }
 
     .pass-container {
@@ -93,100 +105,49 @@ if ( is_user_logged_in() ) {
 
     .eye-toggle {
         position: absolute !important;
-        right: 15px !important;
+        right: 25px !important;
         top: 50% !important;
         transform: translateY(-50%) !important;
         cursor: pointer !important;
-        opacity: 0.7 !important;
-        display: flex !important;
-        align-items: center !important;
+        opacity: 0.5 !important;
     }
 
-    /* ─── Buttons & Social ──────────────────────────────────── */
+    /* ─── Button ────────────────────────────────────────────── */
     .btn-submit-green {
         width: 100% !important;
         background-color: #00A651 !important;
         color: #fff !important;
         border: none !important;
-        border-radius: 8px !important;
-        padding: 16px !important;
+        border-radius: 12px !important; /* Slightly less round than inputs for visual weight */
+        padding: 10px 8px !important;
         font-size: 18px !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
         cursor: pointer !important;
-        margin-top: 10px !important;
-        transition: opacity 0.3s !important;
+        margin-top: 15px !important;
     }
 
     .btn-submit-green:hover {
-        opacity: 0.9 !important;
+        background-color: #008f45 !important;
     }
 
-    .social-divider {
-        text-align: center !important;
-        margin: 40px 0 !important;
-        position: relative !important;
-    }
-
-    .social-divider hr {
-        border: 0 !important;
-        border-top: 1px solid #eee !important;
-    }
-
-    .social-divider span {
-        position: absolute !important;
-        top: -12px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        background: #fff !important;
-        padding: 0 15px !important;
-        color: #999 !important;
-        font-size: 0.9rem !important;
-    }
-
-    .social-row {
-        display: flex !important;
-        gap: 15px !important;
-    }
-
-    .btn-social-outline {
-        flex: 1 !important;
-        background: #fff !important;
-        border: 1px solid #ddd !important;
-        border-radius: 8px !important;
-        padding: 12px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-weight: 500 !important;
+    /* ─── Links ─────────────────────────────────────────────── */
+    .forgot-link {
+        color: #00A651 !important;
+        font-size: 20px !important;
         text-decoration: none !important;
-        color: #333 !important;
-        font-size: 16px !important;
+        font-weight: 500 !important;
     }
 
-    /* ─── Mobile Optimization ──────────────────────────────── */
-    @media (max-width: 768px) {
-        .login-welcome-title {
-            font-size: 1.8rem !important; /* Small enough for one line on mobile */
-        }
-        .login-logo {
-            height: 32px !important; /* Scaled logo */
-            margin: 0 8px !important;
-        }
-        .sb-label {
-            font-size: 16px !important;
-        }
-        .social-row {
-            flex-direction: column !important;
-        }
-    }
-
-    @media (max-width: 400px) {
-        .login-welcome-title {
-            font-size: 1.4rem !important;
-        }
-        .login-logo {
-            height: 26px !important;
-        }
+    /* ─── Mobile ────────────────────────────────────────────── */
+    @media (max-width: 800px) {
+        .login-welcome-title { font-size: 1.5rem !important; flex-wrap: wrap !important; }
+        .login-logo { height: 40px !important; }
+        .sb-input, .btn-submit-green { height: 40px !important; font-size: 18px !important; }
+        .btn-submit-green { padding: 8px 6px !important; margin-top: 5px !important; }
+        .sb-label { font-size: 16px !important; }
+        .forgot-link { font-size: 14px !important; }
     }
 </style>
 
@@ -199,49 +160,32 @@ if ( is_user_logged_in() ) {
         </h1>
     </div>
 
-    
     <form method="post" id="shipbox-login-form">
-         <?php wp_nonce_field('shipbox_login_action', 'shipbox_login_nonce'); ?>
+        <?php wp_nonce_field('shipbox_login_action', 'shipbox_login_nonce'); ?>
         
-          <?php if (isset($result) && is_wp_error($result)) : ?>
-              <div class="alert alert-danger py-2"><?php echo $result->get_error_message(); ?></div>
-          <?php endif; ?>
-          
         <div class="sb-field-group">
-            <label class="sb-label">Phone Number or Email*</label>
+            <div class="sb-label-row">
+                <label class="sb-label">Phone Number or Email*</label>
+            </div>
             <input type="text" name="log" class="sb-input" placeholder="Please Enter Your Phone Number or Email" required>
         </div>
 
         <div class="sb-field-group">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <label class="sb-label" style="margin:0;">Password</label>
-                <a href="<?php echo wp_lostpassword_url(); ?>" style="color: #00A651; font-size: 0.95rem; text-decoration: none; font-weight: 600;">Forgot Password?</a>
+            <div class="sb-label-row">
+                <label class="sb-label">Password</label>
+                <a href="<?php echo wp_lostpassword_url(); ?>" class="forgot-link">Forgot Password?</a>
             </div>
             <div class="pass-container">
                 <input type="password" name="pwd" id="login-password" class="sb-input" placeholder="Please Enter Your Password" required>
                 <span class="eye-toggle" onclick="togglePass()">
                     <span id="eye-icon-svg">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
                     </span>
                 </span>
             </div>
         </div>
 
         <button type="submit" name="shipbox_login_submit" class="btn-submit-green">LOGIN</button>
-
-        <!-- <div class="social-divider">
-            <hr>
-            <span>Or, login with</span>
-        </div> -->
-
-        <!-- <div class="social-row">
-            <a href="#" class="btn-social-outline">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" width="20" style="margin-right: 12px;"> Facebook
-            </a>
-            <a href="#" class="btn-social-outline">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="18" style="margin-right: 12px;"> Google
-            </a>
-        </div> -->
     </form>
 </div>
 
@@ -249,8 +193,8 @@ if ( is_user_logged_in() ) {
 function togglePass() {
     const p = document.getElementById("login-password");
     const icon = document.getElementById("eye-icon-svg");
-    const open = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
-    const close = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+    const open = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+    const close = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
     
     if (p.type === "password") {
         p.type = "text";

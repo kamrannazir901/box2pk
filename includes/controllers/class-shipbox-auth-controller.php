@@ -1,9 +1,4 @@
 <?php
-/**
- * Auth Controller
- * Handles Registration and Login logic
- */
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -89,9 +84,14 @@ class ShipBox_Auth_Controller {
             wp_set_current_user($user_id);
 
 
-            // FIX: Redirect immediately and exit
-            wp_redirect(home_url('/dashboard/')); // Change this to your actual dashboard slug
-            exit;
+            $redirect_url = home_url('/dashboard/');
+            if (!headers_sent()) {
+                wp_safe_redirect($redirect_url);
+                exit;
+            } else {
+                echo '<script>window.location.href="' . esc_url($redirect_url) . '";</script>';
+                exit;
+            }
         }
 
         return new WP_Error('db_error', 'Profile creation failed.');
@@ -112,27 +112,30 @@ class ShipBox_Auth_Controller {
         ];
 
         $user = wp_signon($creds, false);
+        if (is_wp_error($user)) return $user;
 
-        if (is_wp_error($user)) {
-            return $user;
-        } 
-
-        // --- NEW STATUS CHECK LOGIC ---
         global $wpdb;
         $customer_status = $wpdb->get_var($wpdb->prepare(
             "SELECT status FROM {$wpdb->prefix}shipbox_customers WHERE user_id = %d",
             $user->ID
         ));
 
-        // If customer record exists and is NOT active, block them
         if ($customer_status && $customer_status !== 'active') {
-            wp_logout(); // Destroys the session cookies just created by wp_signon
-            return new WP_Error('account_blocked', '<strong>Your account is blocked.</strong> Please contact support for assistance.');
+            wp_logout();
+            return new WP_Error('account_blocked', '<strong>Your account is blocked.</strong> Please contact support.');
         }
 
         wp_set_current_user($user->ID);
-        // FIX: Redirect immediately and exit
-        wp_redirect(home_url('/dashboard/')); // Change this to your actual dashboard slug
+
+        $redirect_url = current_user_can('manage_options') ? admin_url() : home_url('/dashboard/');
+
+        if (!headers_sent()) {
+            wp_safe_redirect($redirect_url);
+            exit;
+        }
+
+        // Fallback for when output already started
+        echo '<script>window.location.href="' . esc_url($redirect_url) . '";</script>';
         exit;
     }
 

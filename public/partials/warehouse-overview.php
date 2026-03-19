@@ -99,7 +99,11 @@ if ( !isset($user_name) ) {
         color: #fff;
     }
     .my-padding {
-        padding: 40px 20px;
+        padding: 50px 20px;
+    }
+    .colored-text{
+        color: var(--plugin-green);
+        font-weight: 700;
     }
 
      /* make button full width on mobile */
@@ -123,81 +127,84 @@ if ( !isset($user_name) ) {
 
     <div class="container bg-white p-3 py-4 rounded-4 mb-4">
         <div style="background: #f3f2f2; border-radius: 8px; margin-bottom: 30px;" class="my-padding">
-            <div class="row g-3 justify-content-center mb-5">
-                        <?php 
-                        foreach ($warehouse_settings as $key => $wh): 
-                            
-                            $country_code = strtoupper($wh['country_code'] ?? '');
-                            $flag = $flags[$country_code] ?? '🌐';
-                            
-                            $display_label = ($country_code === 'USA') ? 'Tax Free Delaware' : 
-                                            (($country_code === 'TURKEY') ? 'Turkey Istanbul' : 'United Kingdom');
-
-                            $full_address_line_2 = trim($wh['address_line2_prefix'] ?? '');
-                        ?>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card dashboard-card h-100">
-                                <div class="card-body text-center p-0">
-                                    <div class="pt-4">
-                                        <span style="font-size: 2.5rem;"><?php echo $flag; ?></span>
-                                        <h6 class="fw-bold mb-3"><?php echo esc_html($display_label); ?></h6>
-                                    </div>
-                                    
-                                    <div class="copy-instruction">CLICK EACH LINE TO COPY</div>
-
-                                    <div class="px-3 pb-3">
-                                        <div class="data-row copyable" data-value="<?php echo esc_attr($user_name); ?>">
-                                            <span class="value-text"><?php echo esc_html($user_name); ?></span>
-                                            <span class="label-text">Full Name</span>
-                                        </div>
-                                        <div class="data-row copyable" data-value="<?php echo esc_attr($wh['address_line1'] ?? ''); ?>">
-                                            <span class="value-text"><?php echo esc_html($wh['address_line1'] ?? ''); ?></span>
-                                            <span class="label-text">Address line 1</span>
-                                        </div>
-                                        <div class="data-row copyable" data-value="<?php echo esc_attr($full_address_line_2); ?>">
-                                            <span class="value-text"><?php echo esc_html($full_address_line_2); ?></span>
-                                            <span class="label-text">Address line 2</span>
-                                        </div>
-                                        <div class="data-row copyable" data-value="<?php echo esc_attr($wh['city'] ?? ''); ?>">
-                                            <span class="value-text"><?php echo esc_html($wh['city'] ?? ''); ?></span>
-                                            <span class="label-text">City</span>
-                                        </div>
-                                        <div class="data-row copyable" data-value="<?php echo esc_attr($wh['state'] ?? ''); ?>">
-                                            <span class="value-text"><?php echo esc_html($wh['state'] ?? ''); ?></span>
-                                            <span class="label-text">State</span>
-                                        </div>
-                                        <div class="data-row copyable" data-value="<?php echo esc_attr($wh['zip_code'] ?? ''); ?>">
-                                            <span class="value-text"><?php echo esc_html($wh['zip_code'] ?? ''); ?></span>
-                                            <span class="label-text">Zip code</span>
-                                        </div>
-                                        <div class="data-row copyable" data-value="<?php echo esc_attr($wh['phone'] ?? ''); ?>">
-                                            <span class="value-text"><?php echo esc_html($wh['phone'] ?? ''); ?></span>
-                                            <span class="label-text">Phone</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-            </div>
-
+            
             <div class="text-center mb-5">
                 <div class="important-container">
                     <h6 class="fw-bold mb-0 pl-8" style="color: var(--plugin-red); padding-left:18px; font-size:1.1rem;">IMPORTANT:</h6>
                     <ol class="ps-3 my-0 fw-bold" style="font-size: 1.1rem; color: #000;">
                         <li>Make sure to enter the provided details in address line 2</li>
-                        <li>Please fill and submit the Order Confirmation Form after placing your order with our address</li>
+                        <li>Please fill and submit the <span class="colored-text">Order Confirmation Form</span> after placing your order with our address</li>
                     </ol>
                 </div>
+            </div>    
+        
+            <div class="row g-3 justify-content-center">
+                            <?php 
+                            foreach ($warehouse_settings as $key => $wh): 
+                                
+                                $country_code = strtoupper($wh['country_code'] ?? '');
+                                $flag = $flags[$country_code] ?? '🌐';
+                                
+                                $display_label = ($country_code === 'USA') ? 'Tax Free Delaware' : 
+                                                (($country_code === 'TURKEY') ? 'Turkey Istanbul' : 'United Kingdom');
+
+                                $full_address_line_2 = trim($wh['address_line2_prefix'] ?? '');
+                            ?>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="card dashboard-card h-100">
+                                    <div class="card-body text-center p-0">
+                                        <div class="pt-4">
+                                            <span style="font-size: 2.5rem;"><?php echo $flag; ?></span>
+                                            <h6 class="fw-bold mb-3"><?php echo esc_html($display_label); ?></h6>
+                                        </div>
+                                        
+                                        <div class="copy-instruction">CLICK EACH LINE TO COPY</div>
+
+                                        <div class="px-3 pb-3">
+                                            <div class="data-row copyable" data-value="<?php echo esc_attr($user_name); ?>">
+                                                <span class="value-text"><?php echo esc_html($user_name); ?></span>
+                                                <span class="label-text">Full Name</span>
+                                            </div>
+                                            <div class="data-row copyable" data-value="<?php echo esc_attr($wh['address_line1'] ?? ''); ?>">
+                                                <span class="value-text"><?php echo esc_html($wh['address_line1'] ?? ''); ?></span>
+                                                <span class="label-text">Address line 1</span>
+                                            </div>
+                                            <div class="data-row copyable" data-value="<?php echo esc_attr($full_address_line_2); ?>">
+                                                <span class="value-text"><?php echo esc_html($full_address_line_2); ?></span>
+                                                <span class="label-text">Address line 2</span>
+                                            </div>
+                                            <div class="data-row copyable" data-value="<?php echo esc_attr($wh['city'] ?? ''); ?>">
+                                                <span class="value-text"><?php echo esc_html($wh['city'] ?? ''); ?></span>
+                                                <span class="label-text">City</span>
+                                            </div>
+                                            <div class="data-row copyable" data-value="<?php echo esc_attr($wh['state'] ?? ''); ?>">
+                                                <span class="value-text"><?php echo esc_html($wh['state'] ?? ''); ?></span>
+                                                <span class="label-text">State</span>
+                                            </div>
+                                            <div class="data-row copyable" data-value="<?php echo esc_attr($wh['zip_code'] ?? ''); ?>">
+                                                <span class="value-text"><?php echo esc_html($wh['zip_code'] ?? ''); ?></span>
+                                                <span class="label-text">Zip code</span>
+                                            </div>
+                                            <div class="data-row copyable" data-value="<?php echo esc_attr($wh['phone'] ?? ''); ?>">
+                                                <span class="value-text"><?php echo esc_html($wh['phone'] ?? ''); ?></span>
+                                                <span class="label-text">Phone</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                </div>
+
+            
             </div>
-        </div>
       
 
-        <div class="text-center p-3" style="background: #E9E9E9; border-radius: 8px;">
-            <a href="<?php echo home_url('/dashboard/?tab=shipment'); ?>" class="dashboard-nav-btn">ORDER CONFIRMATION</a>
-            <a href="<?php echo home_url('/dashboard/?tab=profile'); ?>" class="dashboard-nav-btn">PROFILE</a>
-            <a href="<?php echo home_url('/dashboard/?tab=history'); ?>" class="dashboard-nav-btn">ORDER HISTORY</a>
-        </div>
+            <div class="text-center p-3" style="background: #E9E9E9; border-radius: 8px;">
+                <a href="<?php echo home_url('/dashboard/?tab=shipment'); ?>" class="dashboard-nav-btn">ORDER CONFIRMATION</a>
+                <a href="<?php echo home_url('/dashboard/?tab=profile'); ?>" class="dashboard-nav-btn">PROFILE</a>
+                <a href="<?php echo home_url('/dashboard/?tab=history'); ?>" class="dashboard-nav-btn">ORDER HISTORY</a>
+            </div>
     </div>
 </div>
 

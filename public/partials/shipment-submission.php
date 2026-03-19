@@ -56,7 +56,7 @@ if ( ! is_user_logged_in() || current_user_can('manage_options') ) : ?>
                 </div>
 
                 <div id="merchant-order-container">
-                    <div class="row mb-1 d-none d-md-flex">
+                    <div class="row mb-1 d-flex custom-label-size">
                         <div class="col-4"><label class="form-label fw-bold small mb-1">Ordered from</label></div>
                         <div class="col-4"><label class="form-label fw-bold small mb-1">Order #</label></div>
                         <div class="col-4"><label class="form-label fw-bold small mb-1">Tracking #</label></div>
@@ -241,6 +241,9 @@ if ( ! is_user_logged_in() || current_user_can('manage_options') ) : ?>
     @media (max-width: 768px) {
         .ms-3 {
             margin-left: 1rem !important;
+        }
+        .custom-label-size .form-label {
+            font-size: 14px !important;
         }
     }
 </style>

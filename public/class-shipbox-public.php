@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
  *
@@ -179,7 +178,7 @@ class Shipbox_Public {
   
 
     /**
-     * Login Shortcode
+     * Login Shortcode 
      */
   public function login_shortcode_handler() {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/controllers/class-shipbox-auth-controller.php';
@@ -200,7 +199,6 @@ class Shipbox_Public {
 		}
 
 		ob_start();
-		// The $result variable is now available inside your login-form.php 
 		// to display the WP_Error message automatically.
 		include plugin_dir_path( __FILE__ ) . 'partials/login-form.php';
 		return ob_get_clean();
@@ -403,18 +401,17 @@ class Shipbox_Public {
       return ob_get_clean();
   }
 
-/**
- * 2. Edit Profile Method
- * This is linked to [shipbox_editprofile]
- */
-public function edit_profile_shortcode_handler() {
-    // 1. Initialize the controller where your update logic lives
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/controllers/class-shipbox-auth-controller.php';
-    $auth = new ShipBox_Auth_Controller();
-    
-    // 2. Call the method that handles both the POST processing and the display
-    // This runs the "if ( isset($_POST['shipbox_profile_save']) )" logic inside the controller
-    return $auth->handle_profile_update();
-}
-
+	/**
+	 * 2. Edit Profile Method
+	 * This is linked to [shipbox_editprofile]
+	 */
+	public function edit_profile_shortcode_handler() {
+		// 1. Initialize the controller where your update logic lives
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/controllers/class-shipbox-auth-controller.php';
+		$auth = new ShipBox_Auth_Controller();
+		
+		// 2. Call the method that handles both the POST processing and the display
+		// This runs the "if ( isset($_POST['shipbox_profile_save']) )" logic inside the controller
+		return $auth->handle_profile_update();
+	}
 }
